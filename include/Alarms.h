@@ -6,8 +6,10 @@
 
 #define LED_ALARM 17
 #define BUZZER 5
-#define ALARM_STOP_BTN 34
-#define ALARM_SNOOZE_BTN 25
+
+#define ALARM_STOP_BTN 35 // RED
+#define ALARM_SNOOZE_BTN 26 // BLACK
+
 #define SNOOZE_DURATION 5 // in minutes
 extern long gmtOffset_sec;  // Declare as extern
 

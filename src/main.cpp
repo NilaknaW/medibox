@@ -3,12 +3,15 @@
 #include "alarms.h"
 #include "sensors.h"
 #include "menu.h"
+#include "servomotor.h"
 
 // create objects
 Display oleddisplay; 
 Alarm alarmClock(oleddisplay);
 DHTSensor dht; 
 Menu menu(oleddisplay, alarmClock);
+LDR ldr;
+ServoMotor servo; // create servo object to control the servo motor
 
 // global variables
 String dd, mm, yyyy, hh, minute, sec;
@@ -16,19 +19,29 @@ unsigned long prevMillis;
 unsigned long currentMillis;
 
 void setup() {
-  oleddisplay.initialize();
-  oleddisplay.printfull("Welcome to MediBox");
-  alarmClock.initialize();
+  // initialize sensors
   dht.initialize();
+  ldr.initialize();
+  oleddisplay.initialize();
+  // initialize the user interface
+  oleddisplay.printfull("Welcome to MediBox"); // prints welcome message
+  alarmClock.initialize();
   menu.initialize();
+  // debugging serial monitor
+  Serial.begin(9600);
 }
 
 void loop() {
-  oleddisplay.clear(); // clears the display
   alarmClock.getcurrenttime(); // updates globla time data variables
   alarmClock.checkAlarm(); // checks for alarms
-  oleddisplay.printtime(); // prints the time on the display
   menu.checkMenuBtn(); // checks for menu button presses
-  dht.checkTempHum(oleddisplay); // checks the temperature and humidity
+  ldr.updateLDR(); // updates the LDR value
+  oleddisplay.clear(); // clears the display
+  oleddisplay.printtime(); // prints the time on the display
+  oleddisplay.printline("LDR: " + String(ldr.getCurrentAverage()), 1, 40, 0); // prints the LDR value
+  dht.checkTempHum(oleddisplay); // checks the temperature and humidity and print warning messages
+  servo.update(dht.data.temperature, ldr); // update the servo position based on temperature
   delay(500); // this speeds up the simulation
+  // Serial.println(dht.data.temperature); // prints the temperature value
+
 }

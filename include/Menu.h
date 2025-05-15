@@ -5,9 +5,9 @@
 #include "Display.h"
 #include "Alarms.h"
 
-#define MENU_OK 35
-#define MENU_UP 32
-#define MENU_DOWN 33
+#define MENU_OK 32 // GREEN
+#define MENU_UP 33 // BLUE
+#define MENU_DOWN 25 // YELLOW
 
 class Menu {
 public:
