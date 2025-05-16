@@ -20,7 +20,8 @@ public:
     void update(float temperature, LDR &ldr); // Update the servo position based on temperature  
     void setIdealTemp(float temp); // Set the ideal temperature for the servo
     void setServoMinAngle(float angle); // Set the minimum angle for the servo
-
+    float getServoAngle();
+    
 private:
     Servo servo; // Servo object
     void setServoAngle(int angle); // Set the servo angle

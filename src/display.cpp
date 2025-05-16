@@ -70,3 +70,7 @@ void Display::updateTime(){
 
     printtime();
 }
+
+void Display::printLDR(int ldrValue) {
+    printline("LDR: " + String(ldrValue), 1, 30, 0); // prints the LDR value
+}

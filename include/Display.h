@@ -20,6 +20,7 @@ public:
     void printtime();
     void clear();
     void updateTime();
+    void printLDR(int ldrValue);
 private:
     Adafruit_SSD1306 display;
 };

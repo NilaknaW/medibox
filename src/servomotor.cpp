@@ -23,7 +23,10 @@ void ServoMotor::setServoAngle(int angle) {
     } else if (angle > SERVO_MAX_ANGLE) {
         angle = SERVO_MAX_ANGLE; // Clamp to maximum angle
     }
+    currentAngle = angle; // Update the current angle
     servo.write(angle); // Set the servo position
+    Serial.print("Servo angle: ");
+    Serial.println(angle); // Print the angle for debugging
 } // set the servo angle
 
 void ServoMotor::setIdealTemp(float temp) {
@@ -33,3 +36,7 @@ void ServoMotor::setIdealTemp(float temp) {
 void ServoMotor::setServoMinAngle(float angle) {
     this->servoMinAngle = angle; // Set the minimum angle for the servo
 } // set the minimum angle for the servo
+
+float ServoMotor::getServoAngle() {
+    return currentAngle; // Get the current angle of the servo
+} // get the current angle of the servo
